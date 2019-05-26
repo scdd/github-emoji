@@ -1,0 +1,72 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>表情包图片</title>
+    <style type="text/css">
+        .emoji {
+            width: 100%;
+            position: relative;
+        }
+
+        .emoji .box {
+            list-style-type: none;
+            width: 335px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+            margin: 20px;
+            transition: all .5s;
+        }
+
+        .emoji .box:hover {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5)
+        }
+
+        .emoji img {
+            display: block;
+            margin: 5px auto;
+            width: 280px;
+        }
+
+        .emoji p {
+            color: #000;
+            font-size: 18px;
+            text-align: center;
+            line-height: 1.2;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="emoji" class="emoji"></div>
+    <script src="js/emoji.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/masonry.pkgd.js"></script>
+    <script src="js/imagesloaded.pkgd.min.js"></script>
+    <script>
+        window.onload = function () {
+            var emoji = $("#emoji");
+            var path = "images/"
+            var tpl = '';
+            var _length = Object.keys(emojiData).length - 1;
+
+
+            //遍历数组插入img标签到页面
+            for (var i = 0; i < _length; i++) {
+                tpl += '<div class="box"><img src="' + path + emojiData[i].name + '" /><p>"' + emojiData[i].name + '"</p></div>';//创建img标签，图片地址赋值src
+            }
+
+            emoji.html(tpl);
+            emoji.imagesLoaded(function () {
+                emoji.masonry({
+                    itemSelector: '.box',
+                    isAnimated: true
+                });
+            });
+
+        }
+    </script>
+</body>
+
+</html>
